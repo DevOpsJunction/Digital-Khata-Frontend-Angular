@@ -1,6 +1,38 @@
-<h1>Hello Sujan</h1>
-<ul>
-  <li *ngFor="let user of users">
-   {{user.name}}
-  </li>
-</ul>
+<h3>Display Data</h3>
+<p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>contactNumber</th>
+          <th>Action</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+      <tr>
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.contactNumber }}</td>
+          <td>
+            <p-button (onClick)="updateCustomer(product)" label="Edit" severity="warning"></p-button>          
+            <p-button (onClick)="deleteCustomer(product.id)" label="Delete" severity="danger"></p-button>
+          </td>
+          
+      </tr>
+  </ng-template>
+</p-table>
+
+<h3>Enter Data</h3>
+ <form (ngSubmit)="postCustomer()">
+  
+  <div>
+    <input pInputText  placeholder="Name" [(ngModel)]="postData.name" name="name"/>
+  </div>
+  <br>
+  <div>
+    <input pInputText  placeholder="Contact Number" [(ngModel)]="postData.contactNumber" name="contactNumber"/>
+  </div> 
+  <br>
+  <p-button type="Submit" label="Submit" severity="warning"></p-button>
+</form> 
+
